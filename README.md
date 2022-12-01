@@ -1,2 +1,2 @@
 # spring-boot-value-objects-example
-An example of implementing value objects an domain primitives in Spring Boot application
+An example of implementing value objects and domain primitives in Spring Boot application
