@@ -3,16 +3,15 @@ package com.example.domain;
 import com.example.domain.converter.PhoneNumberConverter;
 import com.example.domain.value.PhoneNumber;
 
+import java.io.Serializable;
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-
-import java.io.Serializable;
-import java.util.UUID;
-
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
