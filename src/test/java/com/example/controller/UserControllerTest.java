@@ -44,8 +44,8 @@ class UserControllerTest {
         ));
 
         assertEquals(
-            new PhoneNumber(71234567890L),
-            new PhoneNumber((long) response.getBody().get("phoneNumber"))
+            new PhoneNumber("71234567890"),
+            new PhoneNumber((String) response.getBody().get("phoneNumber"))
         );
     }
 

@@ -16,7 +16,7 @@ class PhoneNumberTest {
         "78005553535,78005553535",
         "88005553535,78005553535",
     })
-    void shouldParsePhoneNumbersSuccessfully(long input, long expectedOutput) {
+    void shouldParsePhoneNumbersSuccessfully(String input, String expectedOutput) {
         final var phoneNumber = assertDoesNotThrow(
             () -> new PhoneNumber(input)
         );
@@ -24,10 +24,10 @@ class PhoneNumberTest {
     }
 
     @ParameterizedTest
-    @ValueSource(longs = {
-        0, -1, -56
+    @ValueSource(strings = {
+        "0", "-1", "-56"
     })
-    void shouldThrowExceptionIfPhoneNumberIsNotValid(long input) {
+    void shouldThrowExceptionIfPhoneNumberIsNotValid(String input) {
         assertThrows(
             PhoneNumberParsingException.class,
             () -> new PhoneNumber(input)

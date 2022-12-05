@@ -13,21 +13,21 @@ import static com.google.i18n.phonenumbers.PhoneNumberUtil.PhoneNumberFormat.E16
 public class PhoneNumber {
     private static final PhoneNumberUtil PHONE_NUMBER_UTIL = PhoneNumberUtil.getInstance();
 
-    long value;
+    String value;
 
-    public PhoneNumber(long value) {
+    public PhoneNumber(String value) {
         this.value = validateAndNormalizePhoneNumber(value);
     }
 
-    private static long validateAndNormalizePhoneNumber(long value) {
+    private static String validateAndNormalizePhoneNumber(String value) {
         try {
-            if (value <= 0) {
-                throw new PhoneNumberParsingException("The phone number must be positive: " + value);
+            if (Long.parseLong(value) <= 0) {
+                throw new PhoneNumberParsingException("The phone number cannot be negative: " + value);
             }
-            final var phoneNumber = PHONE_NUMBER_UTIL.parse(String.valueOf(value), "RU");
+            final var phoneNumber = PHONE_NUMBER_UTIL.parse(value, "RU");
             final String formattedPhoneNumber = PHONE_NUMBER_UTIL.format(phoneNumber, E164);
             // E164 format returns phone number with + character
-            return Long.parseLong(formattedPhoneNumber.substring(1));
+            return formattedPhoneNumber.substring(1);
         } catch (NumberParseException | NumberFormatException e) {
             throw new PhoneNumberParsingException("The phone number isn't valid: " + value, e);
         }

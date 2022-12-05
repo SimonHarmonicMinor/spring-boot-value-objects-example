@@ -21,10 +21,11 @@ class PhoneNumberSerdeProvider implements SerdeProvider<PhoneNumber> {
         return new JsonDeserializer<>() {
             @Override
             public PhoneNumber deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-                if (p.isNaN()) {
+                final var value = p.getValueAsString();
+                if (value == null) {
                     return null;
                 }
-                return new PhoneNumber(p.getLongValue());
+                return new PhoneNumber(value);
             }
         };
     }
@@ -37,7 +38,7 @@ class PhoneNumberSerdeProvider implements SerdeProvider<PhoneNumber> {
                 if (value == null) {
                     gen.writeNull();
                 } else {
-                    gen.writeNumber(value.getValue());
+                    gen.writeString(value.getValue());
                 }
             }
         };
@@ -48,12 +49,12 @@ class PhoneNumberSerdeProvider implements SerdeProvider<PhoneNumber> {
         return new Formatter<>() {
             @Override
             public PhoneNumber parse(String text, Locale locale) {
-                return new PhoneNumber(Long.parseLong(text));
+                return new PhoneNumber(text);
             }
 
             @Override
             public String print(PhoneNumber object, Locale locale) {
-                return String.valueOf(object.getValue());
+                return object.getValue();
             }
         };
     }

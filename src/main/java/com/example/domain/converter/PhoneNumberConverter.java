@@ -6,14 +6,14 @@ import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
 @Converter
-public class PhoneNumberConverter implements AttributeConverter<PhoneNumber, Long> {
+public class PhoneNumberConverter implements AttributeConverter<PhoneNumber, String> {
     @Override
-    public Long convertToDatabaseColumn(PhoneNumber attribute) {
+    public String convertToDatabaseColumn(PhoneNumber attribute) {
         return attribute.getValue();
     }
 
     @Override
-    public PhoneNumber convertToEntityAttribute(Long dbData) {
+    public PhoneNumber convertToEntityAttribute(String dbData) {
         return new PhoneNumber(dbData);
     }
 }
