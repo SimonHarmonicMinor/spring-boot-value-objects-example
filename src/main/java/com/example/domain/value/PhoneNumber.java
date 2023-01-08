@@ -27,6 +27,7 @@ public class PhoneNumber {
             final var phoneNumber = PHONE_NUMBER_UTIL.parse(value, "RU");
             final String formattedPhoneNumber = PHONE_NUMBER_UTIL.format(phoneNumber, E164);
             // E164 format returns phone number with + character
+            // Возвращаем телефон в формате 78005553535
             return formattedPhoneNumber.substring(1);
         } catch (NumberParseException | NumberFormatException e) {
             throw new PhoneNumberParsingException("The phone number isn't valid: " + value, e);

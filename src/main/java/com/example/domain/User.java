@@ -1,6 +1,8 @@
 package com.example.domain;
 
+import com.example.domain.converter.PassportConverter;
 import com.example.domain.converter.PhoneNumberConverter;
+import com.example.domain.value.Passport;
 import com.example.domain.value.PhoneNumber;
 
 import java.io.Serializable;
@@ -27,6 +29,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 public class User {
     @EmbeddedId
+    @NotNull
     private ID id;
 
     @Column(name = "phone_number")
@@ -34,9 +37,14 @@ public class User {
     @NotNull
     private PhoneNumber phoneNumber;
 
-    public static User newUser(PhoneNumber phoneNumber) {
+    @Convert(converter = PassportConverter.class)
+    @NotNull
+    private Passport passport;
+
+    public static User newUser(PhoneNumber phoneNumber, Passport passport) {
         final var user = new User();
         user.phoneNumber = phoneNumber;
+        user.passport = passport;
         user.id = new User.ID(UUID.randomUUID());
         return user;
     }
@@ -47,8 +55,6 @@ public class User {
     @AllArgsConstructor
     @NoArgsConstructor(access = PROTECTED)
     public static class ID implements Serializable {
-        @Column(updatable = false)
-        @NotNull
         private UUID id;
     }
 }
