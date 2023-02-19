@@ -45,21 +45,6 @@ class PhoneNumberSerdeProvider implements SerdeProvider<PhoneNumber> {
     }
 
     @Override
-    public Formatter<PhoneNumber> getTypedFieldFormatter() {
-        return new Formatter<>() {
-            @Override
-            public PhoneNumber parse(String text, Locale locale) {
-                return new PhoneNumber(text);
-            }
-
-            @Override
-            public String print(PhoneNumber object, Locale locale) {
-                return object.getValue();
-            }
-        };
-    }
-
-    @Override
     public Class<PhoneNumber> getType() {
         return PhoneNumber.class;
     }

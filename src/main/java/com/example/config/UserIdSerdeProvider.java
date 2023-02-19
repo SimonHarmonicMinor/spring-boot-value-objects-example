@@ -44,7 +44,7 @@ class UserIdSerdeProvider implements SerdeProvider<User.ID> {
         };
     }
 
-    @Override
+    //@Override
     public Formatter<User.ID> getTypedFieldFormatter() {
         return new Formatter<>() {
             @Override

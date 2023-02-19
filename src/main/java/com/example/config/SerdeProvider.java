@@ -10,7 +10,7 @@ public interface SerdeProvider<T> {
 
     JsonSerializer<T> getJsonSerializer();
 
-    Formatter<T> getTypedFieldFormatter();
+    // Formatter<T> getTypedFieldFormatter();
 
     Class<T> getType();
 }

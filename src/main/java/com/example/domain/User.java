@@ -2,9 +2,11 @@ package com.example.domain;
 
 import com.example.domain.converter.PassportConverter;
 import com.example.domain.converter.PhoneNumberConverter;
+import com.example.domain.converter.UserNameAttributeConverter;
 import com.example.domain.value.Passport;
 import com.example.domain.value.PhoneNumber;
 
+import jakarta.persistence.Id;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -20,17 +22,22 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Value;
 
 import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
-@Table(name = "users")
 @Getter
 public class User {
-    @EmbeddedId
-    @NotNull
-    private ID id;
+    @Id
+    private UUID id;
+
+    private String name;
+
+    public void changeName(User.Name name) {
+        this.name = name.getValue();
+    }
 
     @Column(name = "phone_number")
     @Convert(converter = PhoneNumberConverter.class)
@@ -45,7 +52,7 @@ public class User {
         final var user = new User();
         user.phoneNumber = phoneNumber;
         user.passport = passport;
-        user.id = new User.ID(UUID.randomUUID());
+        user.id = UUID.randomUUID();
         return user;
     }
 
@@ -56,5 +63,10 @@ public class User {
     @NoArgsConstructor(access = PROTECTED)
     public static class ID implements Serializable {
         private UUID id;
+    }
+
+    @Value
+    public static class Name {
+        String value;
     }
 }

@@ -5,11 +5,13 @@ import com.google.i18n.phonenumbers.PhoneNumberUtil;
 
 import com.example.domain.exception.PhoneNumberParsingException;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Value;
 
 import static com.google.i18n.phonenumbers.PhoneNumberUtil.PhoneNumberFormat.E164;
 
 @Value
+@Schema(implementation = String.class, description = "Phone number")
 public class PhoneNumber {
     private static final PhoneNumberUtil PHONE_NUMBER_UTIL = PhoneNumberUtil.getInstance();
 
